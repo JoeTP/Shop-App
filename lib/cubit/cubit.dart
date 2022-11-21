@@ -62,7 +62,7 @@ class AppCubit extends Cubit<AppState> {
       homeModel!.data!.products.forEach((element) {
         favorites.addAll({element.id!: element.inFavorites!});
       });
-      print(favorites);
+      // print(favorites);
       emit(AppGetHomeDataSuccessState());
     }).catchError((e) {
       print('####HOME DATA##### ${e.toString()}');
@@ -127,17 +127,36 @@ class AppCubit extends Cubit<AppState> {
   }
 
   UserModel? userModel;
+
   void getUser() {
-    DioHelper.getData(
-      url: PROFILE,
-      token: token
-    ).then((value) {
+    DioHelper.getData(url: PROFILE, token: token).then((value) {
       userModel = UserModel.fromJson(value.data);
       // print(catModelData!.status);
       emit(AppGetUserDataSuccessState());
     }).catchError((e) {
       print('####USER DATA##### ${e.toString()}');
       emit(AppGetUserDataErrorState());
+    });
+  }
+
+  void updateUser({
+    required String name,
+    required String phone,
+    required String email,
+  }) {
+    emit(AppLoadingUpdateUserDataSuccessState());
+
+    DioHelper.putData(url: UPDATE_PROFILE, token: token, data: {
+      'name': name,
+      'phone': phone,
+      'email': email,
+    }).then((value) {
+      userModel = UserModel.fromJson(value.data);
+      print(userModel!.data!.name!);
+      emit(AppUpdateUserDataSuccessState());
+    }).catchError((e) {
+      print('####USER DATA##### ${e.toString()}');
+      emit(AppUpdateUserDataErrorState());
     });
   }
 

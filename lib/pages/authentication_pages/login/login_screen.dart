@@ -9,7 +9,6 @@ import 'package:shop_app/pages/authentication_pages/login/cubit/login_cubit.dart
 import 'package:shop_app/pages/authentication_pages/register/register_screen.dart';
 import 'package:shop_app/widgets/reusable/custom_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -104,11 +103,25 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: 10),
-                        Conditional.single(
-                          context: context,
-                          conditionBuilder: (context) =>
-                              state is! LoginLoadingState,
-                          widgetBuilder: (context) => ElevatedButton(
+                        // Conditional.single(
+                        //   context: context,
+                        //   conditionBuilder: (context) =>
+                        //       state is! LoginLoadingState,
+                        //   widgetBuilder: (context) => ElevatedButton(
+                        //       onPressed: () {
+                        //         if (formKey.currentState!.validate()) {
+                        //           cubit.userLogin(
+                        //             email: emailController.text,
+                        //             password: passwordController.text,
+                        //           );
+                        //         }
+                        //       },
+                        //       child: Text('LOGIN')),
+                        //   fallbackBuilder: (context) =>
+                        //       Center(child: CircularProgressIndicator()),
+                        // ),
+                        if(state is! LoginLoadingState)...[
+                          ElevatedButton(
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   cubit.userLogin(
@@ -117,10 +130,11 @@ class LoginScreen extends StatelessWidget {
                                   );
                                 }
                               },
-                              child: Text('LOGIN')),
-                          fallbackBuilder: (context) =>
-                              Center(child: CircularProgressIndicator()),
-                        ),
+                              child: Text('LOGIN'))
+                        ]else ...[
+
+                          Center(child: CircularProgressIndicator())
+                        ],
                         Row(
                           children: [
                             Text('Don\'t have an account?'),

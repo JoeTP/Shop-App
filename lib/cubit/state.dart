@@ -42,3 +42,9 @@ class AppChangeFavoriteErrorState extends AppState {}
 class AppGetUserDataSuccessState extends AppState {}
 
 class AppGetUserDataErrorState extends AppState {}
+
+class AppLoadingUpdateUserDataSuccessState extends AppState {}
+
+class AppUpdateUserDataSuccessState extends AppState {}
+
+class AppUpdateUserDataErrorState extends AppState {}

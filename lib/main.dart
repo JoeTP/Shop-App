@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/pages/authentication_pages/login/cubit/login_cubit.dart';
 import 'package:shop_app/pages/authentication_pages/login/login_screen.dart';
 import 'package:shop_app/pages/on_board%20screen.dart';
-import 'package:get/get.dart';
 import 'package:shop_app/widgets/gridview_product_item.dart';
 import 'package:shop_app/widgets/reusable/product_item.dart';
 
@@ -33,18 +32,12 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
-  // print('test 1');
-
   bool? isDark = CacheHelper.getData(key: 'isDark');
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
-  // print('test 2');
-
   token = CacheHelper.getData(key: 'token');
-  // print('test 3');
-
   Widget? startingScreen;
   if (onBoarding != null) {
-    if (token.isNotEmpty || token != null)
+    if (token != null)
       startingScreen = Home();
     else
       startingScreen = LoginScreen();
@@ -53,8 +46,9 @@ void main() async {
   }
   // print('test 4');
   print('token is:$token');
+  print('MODE IS $isDark');
   runApp(MyApp(
-    isDark: isDark == null ? false : true,
+    isDark: isDark!,
     startingScreen: startingScreen,
   ));
 }
@@ -67,19 +61,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) => AppCubit()
-              ..getHomeData()
-              ..getCategories()
-              ..getFavorites()..getUser(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => AppCubit()
+        ..getHomeData()
+        ..getCategories()
+        ..getFavorites()
+        ..getUser()
+        ..changeDarkModeSwitch(v: isDark),
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return GetMaterialApp(
+          return MaterialApp(
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: AppCubit.get(context).darkModeSwitch
