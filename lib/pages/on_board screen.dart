@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/cubit/cubit.dart';
-import 'package:shop_app/functions/used_functions.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/pages/authentication_pages/login/cubit/login_cubit.dart';
 import 'package:shop_app/pages/authentication_pages/login/login_screen.dart';
@@ -55,6 +54,7 @@ class OnBoardScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ))
         ],
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),

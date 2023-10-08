@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/config/text_styles/text_styles.dart';
 import 'package:shop_app/config/variables.dart';
 import 'package:shop_app/cubit/cubit.dart';
-import 'package:shop_app/functions/used_functions.dart';
 import 'package:shop_app/home_screen.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/pages/authentication_pages/login/cubit/login_cubit.dart';

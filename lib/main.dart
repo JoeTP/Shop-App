@@ -48,7 +48,7 @@ void main() async {
   print('token is:$token');
   print('MODE IS $isDark');
   runApp(MyApp(
-    isDark: isDark!,
+    isDark: false,
     startingScreen: startingScreen,
   ));
 }
@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             debugShowCheckedModeBanner: false,
-            home: SafeArea(child: startingScreen),
+            home: SafeArea(child: Home()),
           );
         },
       ),
