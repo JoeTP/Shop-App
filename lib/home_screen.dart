@@ -15,6 +15,7 @@ class Home extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
+          backgroundColor: Color(0xFFFFEECE),
           endDrawer: MyDrawer(),
           appBar: AppBar(
             title: Text('Shop'),

@@ -5,7 +5,8 @@ import 'package:shop_app/models/home_model.dart';
 
 class SliderOffers extends StatelessWidget {
   final HomeModel model;
-  SliderOffers({Key? key,required this.model}) : super(key: key);
+
+  SliderOffers({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +14,23 @@ class SliderOffers extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 20),
       child: CarouselSlider(
         items: model.data!.banners
-            .map((e) => ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image(
-            image: NetworkImage(e.image!),
-            width: screenWidth,
-            fit: BoxFit.cover,
-          ),
-        ))
+            .map((e) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 1,
+                      color: Color(0x88000000),
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                      image: NetworkImage(e.image!),
+                      width: screenWidth,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ))
             .toList(),
         options: CarouselOptions(
           reverse: false,

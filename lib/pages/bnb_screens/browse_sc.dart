@@ -35,7 +35,7 @@ class BrowseScreen extends StatelessWidget {
                         child: TitleText(
                           text: 'Categories',
                           fontSize: 24,
-                          color: Colors.white,
+                          color: Colors.black87,
                         ),
                       ),
                       SizedBox(height: 10),
@@ -46,7 +46,7 @@ class BrowseScreen extends StatelessWidget {
                         child: TitleText(
                           text: 'New Items',
                           fontSize: 24,
-                          color: Colors.white,
+                          color: Colors.black87,
                         ),
                       ),
                       SizedBox(height: 10),
